@@ -4,13 +4,9 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_layout.view.*
-import kotlinx.coroutines.*
 import org.techm.telstra.R
 import org.techm.telstra.data.model.Rows
-import kotlin.coroutines.CoroutineContext
 
 
 /**
