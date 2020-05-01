@@ -1,4 +1,4 @@
-package org.techm.telstra.ui
+package org.techm.telstra.ui.country.view
 
 import android.content.Context
 import android.os.Bundle
