@@ -13,8 +13,8 @@ import org.techm.telstra.util.Resource
 
 
 /**
-* @class{CountryViewModel}
-*/
+ * @class{CountryViewModel}
+ */
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
     private lateinit var job: Job
 
@@ -26,28 +26,12 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     fun fetchCountryData() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = repository.getCountryFeatureTitle()))
-        } catch (exception: Exception) {
-            emit(
-                Resource.error(
-                    data = null,
-                    message = exception.message ?: "Error! ${Constants.ERROR_MSG}"
-                )
-            )
+            emit(Resource.success(
+                data = repository.getCountryFeatureTitle()))
+        }catch (exception: Exception) {
+            emit(Resource.error(data = null , message = exception.message ?: "Error! ${Constants.ERROR_MSG}"))
         }
     }
-
-
-    /**
-     * fetch from coroutines io thread
-     */
-    /*fun fetchData() {
-        job = CoroutinesIO.ioMain({
-            repository.getCountryFeatureTitle()
-        }) {
-            model.value
-        }
-    }*/
 
     override fun onCleared() {
         super.onCleared()
@@ -55,47 +39,3 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     }
 }
 
-/*
-class CountryViewModel(private val dataRepo: CountryRepository): ViewModel() {
-
-    private val titleList = MutableLiveData<Resource<CountryDataModel>>()
-    private val compositeDisposable = CompositeDisposable()
-
-    */
-/**
- * function to fetch data from server
- *//*
-
-    fun fetchData() {
-        titleList.postValue(Resource.loading(null))
-        compositeDisposable.add(
-            dataRepo.getCountryFeatureTitle()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { list -> titleList.postValue(Resource.success(list))} ,
-                    {t: Throwable? -> titleList.postValue(Resource.error(Constant.ERROR_MSG , null))}
-        ))
-    }
-
-    */
-/**
- * clears the view state
- *//*
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
-    }
-
-    */
-/**
- * retrieving list to data model
- *//*
-
-    fun fetchList(): LiveData<Resource<CountryDataModel>> {
-        return titleList
-    }
-
-
-}*/

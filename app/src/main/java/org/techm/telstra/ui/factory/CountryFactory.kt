@@ -8,7 +8,7 @@ import org.techm.telstra.ui.country.viewmodel.CountryViewModel
 
 
 /**
- * @class{ViewModelFactory}
+ * @class{CountryFactory}
  */
 class CountryFactory(private val apiHelper: APIHelper) : ViewModelProvider.Factory {
 

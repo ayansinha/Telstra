@@ -6,7 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.techm.telstra.R
 
-
+/**
+ * @class{CountryHolder}
+ */
 class CountryHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     var itemImage: ImageView = itemView.findViewById(R.id.imageViewPic)

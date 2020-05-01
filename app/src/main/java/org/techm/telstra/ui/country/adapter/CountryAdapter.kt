@@ -1,12 +1,16 @@
 package org.techm.telstra.ui.country.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_layout.view.*
+import kotlinx.coroutines.*
 import org.techm.telstra.R
 import org.techm.telstra.data.model.Rows
+import kotlin.coroutines.CoroutineContext
 
 
 /**
@@ -14,6 +18,8 @@ import org.techm.telstra.data.model.Rows
  */
 
 class CountryAdapter(private var data: ArrayList<Rows>) : RecyclerView.Adapter<CountryHolder>() {
+
+    private var uri: Uri? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CountryHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
@@ -31,27 +37,11 @@ class CountryAdapter(private var data: ArrayList<Rows>) : RecyclerView.Adapter<C
         holder.itemTitle.text = data[position].title
         holder.itemDescription.text = data[position].description
 
-        Glide.with(holder.itemImage.context)
+        Picasso.get()
             .load(data[position].imageHref)
-            //.placeholder(R.drawable.no_image_icon)
+            .placeholder(R.drawable.no_image_icon)
             .error(R.drawable.no_image_icon)
-            //.fallback(R.drawable.no_image_icon)
-            //.diskCacheStrategy(DiskCacheStrategy.DATA)
-            //.transition(DrawableTransitionOptions.withCrossFade())
-            .into(holder.itemImage.imageViewPic)
-
-        /*} else {
-
-            Glide.with(holder.itemImage.context)
-                //.load(data[position].imageHref)
-                .load(R.drawable.no_image_icon)
-                //.diskCacheStrategy(DiskCacheStrategy.ALL)
-                //.fallback(R.drawable.no_image_icon)
-                .placeholder(R.drawable.no_image_icon)
-                //.error(R.drawable.no_image_icon)
-                //.transition(DrawableTransitionOptions.withCrossFade())
-                .into(holder.itemImage.imageViewPic)
-        }*/
+            .into(holder.itemImage)
     }
 
     /**
@@ -68,8 +58,13 @@ class CountryAdapter(private var data: ArrayList<Rows>) : RecyclerView.Adapter<C
     }
 
     /**
-     * remove data-source from list
+     * removes data-source from list
      */
-    fun removeData(list: ArrayList<Rows>) = data.removeAll(list)
+    fun removeData(list: ArrayList<Rows>) {
+        data.removeAll(list)
+    }
+
+
+
 
 }
