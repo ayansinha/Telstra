@@ -1,18 +1,9 @@
 package org.techm.telstra.ui.country.adapter
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.techm.telstra.R
+import org.techm.telstra.databinding.ItemCountryBinding
 
 /**
  * @class{CountryHolder}
  */
-class CountryHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-
-    var itemImage: ImageView = itemView.findViewById(R.id.imageViewPic)
-    var itemTitle: TextView = itemView.findViewById(R.id.textViewTitle)
-    var itemDescription: TextView = itemView.findViewById(R.id.textViewDescription)
-
-}
+class CountryHolder(val itemCountryBinding : ItemCountryBinding) : RecyclerView.ViewHolder(itemCountryBinding.root)

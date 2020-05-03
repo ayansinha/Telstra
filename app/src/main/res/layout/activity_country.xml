@@ -7,7 +7,6 @@
     tools:context=".ui.country.view.CountryActivity">
 
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
@@ -17,7 +16,8 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:listitem="@layout/item_country" />
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -69,7 +69,7 @@ class CountryActivity : AppCompatActivity() {
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
         imageViewNoConnection = findViewById(R.id.imageViewNoConnection)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = CountryAdapter(arrayListOf())
+        adapter = CountryAdapter(arrayListOf() , this)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 recyclerView.context,
