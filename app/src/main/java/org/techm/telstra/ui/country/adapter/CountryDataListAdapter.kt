@@ -14,11 +14,11 @@ import org.techm.telstra.data.model.CountryDataItem
  * @class{CountryAdapter}
  */
 
-class CountryAdapter(private var data: ArrayList<CountryDataItem>, var context: Context) :
-    RecyclerView.Adapter<CountryHolder>() {
+class CountryDataListAdapter(private var data: ArrayList<CountryDataItem>, var context: Context) :
+    RecyclerView.Adapter<CountryDataItemHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryHolder =
-        CountryHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryDataItemHolder =
+        CountryDataItemHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.item_country,
@@ -29,7 +29,7 @@ class CountryAdapter(private var data: ArrayList<CountryDataItem>, var context: 
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: CountryHolder, position: Int) {
+    override fun onBindViewHolder(holder: CountryDataItemHolder, position: Int) {
 
         holder.itemCountryBinding.country = data[position]
         holder.itemCountryBinding.cardViewContainer.setAnimation(

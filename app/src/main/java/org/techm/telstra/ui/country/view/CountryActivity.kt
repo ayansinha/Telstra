@@ -4,24 +4,24 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_country.*
 import org.techm.telstra.R
 import org.techm.telstra.data.model.CountryDataModel
 import org.techm.telstra.data.model.CountryDataItem
 import org.techm.telstra.data.network.APIHelper
 import org.techm.telstra.data.network.RetrofitBuilder
-import org.techm.telstra.ui.country.adapter.CountryAdapter
+import org.techm.telstra.ui.country.adapter.CountryDataListAdapter
 import org.techm.telstra.ui.country.viewmodel.CountryViewModel
 import org.techm.telstra.ui.factory.CountryFactory
-import org.techm.telstra.util.Constants
-import org.techm.telstra.util.Status
-import org.techm.telstra.util.toastShort
+import org.techm.telstra.util.*
 
 /**
  * @class{CountryActivity}
@@ -29,7 +29,7 @@ import org.techm.telstra.util.toastShort
 class CountryActivity : AppCompatActivity() {
 
     private lateinit var countryViewModel: CountryViewModel
-    private lateinit var adapter: CountryAdapter
+    private lateinit var adapter: CountryDataListAdapter
     private var dataModel: CountryDataModel? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -41,7 +41,15 @@ class CountryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_country)
         setupUI()
         setUpViewModel()
-        setupAPICall()
+        if (isConnection()) {
+            setupAPICall()
+        }else {
+            toastShort(Constants.NO_CONNECTION)
+            recyclerView.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+            imageViewNoConnection.visibility = View.VISIBLE
+        }
+
         /**
          * swipe on refresh
          */
@@ -67,7 +75,7 @@ class CountryActivity : AppCompatActivity() {
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
         imageViewNoConnection = findViewById(R.id.imageViewNoConnection)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = CountryAdapter(arrayListOf() , this)
+        adapter = CountryDataListAdapter(arrayListOf() , this)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 recyclerView.context,
@@ -93,7 +101,6 @@ class CountryActivity : AppCompatActivity() {
                         recyclerView.visibility = View.VISIBLE
                         resource.data?.let {it ->
                             supportActionBar?.title = it.body()?.title
-
                             if (list.isNullOrEmpty()) {
                                 it.body()?.let { it -> retrieveCountryFeatureRows(it.dataItem) }
                                 list = (it.body()?.dataItem)
@@ -104,7 +111,7 @@ class CountryActivity : AppCompatActivity() {
                         recyclerView.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
                         imageViewNoConnection.visibility = View.VISIBLE
-                        toastShort(Constants.NO_CONNECTION)
+                        recyclerView.showSnackBar(Constants.ERROR_MSG)
                     }
                     Status.LOADING -> {
                         progressBar.visibility = View.VISIBLE

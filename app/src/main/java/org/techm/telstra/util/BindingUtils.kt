@@ -21,5 +21,6 @@ fun loadImageUrl(view: ImageView, url: String?) {
     Glide.with(view)
         .setDefaultRequestOptions(options)
         .load(url)
+        .override(view.width , view.height)
         .into(view)
 }

@@ -6,4 +6,4 @@ import org.techm.telstra.databinding.ItemCountryBinding
 /**
  * @class{CountryHolder}
  */
-class CountryHolder(val itemCountryBinding : ItemCountryBinding) : RecyclerView.ViewHolder(itemCountryBinding.root)
+class CountryDataItemHolder(val itemCountryBinding : ItemCountryBinding) : RecyclerView.ViewHolder(itemCountryBinding.root)

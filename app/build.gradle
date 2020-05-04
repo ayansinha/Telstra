@@ -3,8 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def rx_java = "2.2.18"
-def rx_android = "2.1.1"
+
 def recycler_view = "1.1.0"
 def glide = "4.11.0"
 def card_view = "1.0.0"
@@ -88,7 +87,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     /**
-     * glide and picasso dependency
+     * glide dependency
      */
     implementation "com.github.bumptech.glide:glide:$glide"
     kapt "com.github.bumptech.glide:compiler:$glide"
@@ -98,12 +97,4 @@ dependencies {
      * arch lifecycle dependency
      */
     implementation "android.arch.lifecycle:extensions:$arch_lifecycle"
-
-    /**
-     * rx_java and rx_android dependency
-     */
-    implementation "io.reactivex.rxjava2:rxjava:$rx_java"
-    implementation "io.reactivex.rxjava2:rxandroid:$rx_android"
-
-
 }
