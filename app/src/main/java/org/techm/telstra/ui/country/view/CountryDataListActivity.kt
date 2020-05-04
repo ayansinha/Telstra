@@ -26,7 +26,7 @@ import org.techm.telstra.util.*
 /**
  * @class{CountryActivity}
  */
-class CountryActivity : AppCompatActivity() {
+class CountryDataListActivity : AppCompatActivity() {
 
     private lateinit var countryViewModel: CountryViewModel
     private lateinit var adapter: CountryDataListAdapter

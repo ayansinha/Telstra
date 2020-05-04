@@ -9,10 +9,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.techm.telstra.R
 
-class CountryActivityTest {
+class CountryDataListActivityTest {
 
     @get : Rule
-    val countryActivityRule: ActivityScenarioRule<CountryActivity> = ActivityScenarioRule(CountryActivity::class.java)
+    val countryActivityRule: ActivityScenarioRule<CountryDataListActivity> = ActivityScenarioRule(CountryDataListActivity::class.java)
 
     @Test
     fun recyclerViewTestScrolling() {
