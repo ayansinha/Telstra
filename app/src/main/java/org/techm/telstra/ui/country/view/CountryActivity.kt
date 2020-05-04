@@ -13,7 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_country.*
 import org.techm.telstra.R
 import org.techm.telstra.data.model.CountryDataModel
-import org.techm.telstra.data.model.Rows
+import org.techm.telstra.data.model.CountryDataItem
 import org.techm.telstra.data.network.APIHelper
 import org.techm.telstra.data.network.RetrofitBuilder
 import org.techm.telstra.ui.country.adapter.CountryAdapter
@@ -34,7 +34,7 @@ class CountryActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var imageViewNoConnection: ImageView
-    private var list: ArrayList<Rows>? = null
+    private var list: ArrayList<CountryDataItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +59,6 @@ class CountryActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = false
         }
     }
-
-
     /**
      * initialize ui elements
      */
@@ -78,18 +76,16 @@ class CountryActivity : AppCompatActivity() {
         )
         recyclerView.adapter = adapter
     }
-
     private fun setUpViewModel() {
         countryViewModel =
             ViewModelProviders.of(this, CountryFactory(APIHelper(RetrofitBuilder.apiService)))
                 .get(CountryViewModel::class.java)
     }
-
     /**
      * setUpObservers
      */
     private fun setupAPICall() {
-        countryViewModel.fetchCountryData().observe(this , Observer {
+        countryViewModel.getCountryModel().observe(this , Observer {
             it?.let {resource ->
                 when(resource.status) {
                     Status.SUCCESS -> {
@@ -99,8 +95,8 @@ class CountryActivity : AppCompatActivity() {
                             supportActionBar?.title = it.body()?.title
 
                             if (list.isNullOrEmpty()) {
-                                it.body()?.let { it -> retrieveCountryFeatureRows(it.rows) }
-                                list = (it.body()?.rows)
+                                it.body()?.let { it -> retrieveCountryFeatureRows(it.dataItem) }
+                                list = (it.body()?.dataItem)
                             }
                         }
                     }
@@ -119,8 +115,8 @@ class CountryActivity : AppCompatActivity() {
         })
     }
 
-    private fun retrieveCountryFeatureRows(rows: ArrayList<Rows>) {
-        adapter.addData(rows)
+    private fun retrieveCountryFeatureRows(dataItem: ArrayList<CountryDataItem>) {
+        adapter.addData(dataItem)
         adapter.notifyDataSetChanged()
     }
 }

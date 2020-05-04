@@ -7,14 +7,14 @@ import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.techm.telstra.R
-import org.techm.telstra.data.model.Rows
+import org.techm.telstra.data.model.CountryDataItem
 
 
 /**
  * @class{CountryAdapter}
  */
 
-class CountryAdapter(private var data: ArrayList<Rows>, var context: Context) :
+class CountryAdapter(private var data: ArrayList<CountryDataItem>, var context: Context) :
     RecyclerView.Adapter<CountryHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryHolder =
@@ -43,11 +43,11 @@ class CountryAdapter(private var data: ArrayList<Rows>, var context: Context) :
     /**
      * add data-source to list
      */
-    fun addData(list: ArrayList<Rows>) {
+    fun addData(list: ArrayList<CountryDataItem>) {
 
-        for (rows in list) {
-            if ((rows.title != null) || (rows.description != null) || (rows.imageHref != null)) {
-                data.add(rows)
+        for (dataItem in list) {
+            if ((dataItem.title != null) || (dataItem.description != null) || (dataItem.imageHref != null)) {
+                data.add(dataItem)
             }
         }
 
@@ -56,7 +56,7 @@ class CountryAdapter(private var data: ArrayList<Rows>, var context: Context) :
     /**
      * removes data-source from list
      */
-    fun removeData(list: ArrayList<Rows>) {
+    fun removeData(list: ArrayList<CountryDataItem>) {
         data.removeAll(list)
     }
 }

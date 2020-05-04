@@ -3,4 +3,5 @@
     <color name="colorPrimary">#F57F17</color>
     <color name="colorPrimaryDark">#BC5100</color>
     <color name="colorAccent">#FFB04C</color>
+    <color name="colorBlueTextView">#466797</color>
 </resources>

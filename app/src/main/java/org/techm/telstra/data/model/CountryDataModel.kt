@@ -11,5 +11,5 @@ data class CountryDataModel(
     val title: String = "",
 
     @SerializedName("rows")
-    val rows : ArrayList<Rows>
+    val dataItem: ArrayList<CountryDataItem>
 )

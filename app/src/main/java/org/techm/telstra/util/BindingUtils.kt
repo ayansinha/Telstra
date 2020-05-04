@@ -18,7 +18,6 @@ fun loadImageUrl(view: ImageView, url: String?) {
     val options = RequestOptions()
     options.placeholder(R.drawable.no_image_icon)
     options.error(R.drawable.no_image_icon)
-
     Glide.with(view)
         .setDefaultRequestOptions(options)
         .load(url)

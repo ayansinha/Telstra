@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * data class for rows
  */
-data class Rows (
+data class CountryDataItem (
     @SerializedName("title")
     @Expose
     val title : String? = null,

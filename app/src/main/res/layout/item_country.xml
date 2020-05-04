@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="country"
-            type="org.techm.telstra.data.model.Rows" />
+            type="org.techm.telstra.data.model.CountryDataItem" />
     </data>
     <androidx.cardview.widget.CardView
         style="@style/CardView.Light"
@@ -32,7 +32,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="#466797"
+                android:textColor="@color/colorBlueTextView"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewPic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
