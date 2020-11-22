@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.techm.telstra.data.model.CountryDataModel
@@ -21,7 +22,7 @@ class CountryViewModel(private val apiHelper: APIHelper) : ViewModel() {
     private val countryModel = MutableLiveData<Resource<Response<CountryDataModel>>>()
     init { fetchCountryData() }
     private fun fetchCountryData() {
-        viewModelScope.launch {
+        viewModelScope.launch(IO + job) {
             countryModel.postValue(Resource.loading(null))
             try {
                 countryModel.postValue(Resource.success(apiHelper.getCountry()))
